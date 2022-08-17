@@ -33,13 +33,25 @@ void FilterBlur::startWork(Canvas2D *canvas,
 void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
                          std::vector<RGBA> data2, std::vector<RGBA> data3){
     RGBA* dataBox = new RGBA[40*72*72];
-    std::cout << "Create box!";
-    //go through data2
     int planeSize = 40*72;
+    std::cout << "Create box!";
+
+    //go through data2, which is the front face
     for(int i=0; i<data2.size(); i++){
         if(data2[i].r!= 0 || data2[i].g!= 0 || data2[i].b!= 0){
             for(int j=0; j<72; j++){
                 dataBox[planeSize*j + i] = data2[i];
+            }
+        }
+    }
+
+    //go through data1
+    for(int i=0; i<data1.size(); i++){
+        int toTop = i/72;
+        int toleft = i%72;
+        if(data1[i].r == 0 && data1[i].g == 0 && data1[i].b == 0){
+            for(int j=0; j<72; j++){
+                dataBox[planeSize*(72-toleft) + toTop*72 + j] = RGBA(0,0,0,0);
             }
         }
     }
