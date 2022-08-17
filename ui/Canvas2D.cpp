@@ -136,7 +136,7 @@ void Canvas2D::filterImage() {
     }
 
         m_filter = std::make_unique<FilterBlur>();
-        m_filter ->read(this, data1, data2, data3);
+        m_filter ->startWork(this, data1, data2, data3);
 
 
 
