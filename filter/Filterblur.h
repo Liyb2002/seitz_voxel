@@ -17,11 +17,14 @@ public:
     void process(Canvas2D *canvas,std::vector<RGBA>data1,
                  std::vector<RGBA>data2, std::vector<RGBA>data3);
 
-    float rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox);
+    RGBA rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox);
 
     void render(Canvas2D *canvas, RGBA* dataBox);
 
     void checkBox(Canvas2D *canvas, RGBA* dataBox);
+
+    Canvas2D removeAll(Canvas2D *canvas);
+
 
 
 

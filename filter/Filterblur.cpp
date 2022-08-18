@@ -58,7 +58,9 @@ void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
         }
     }
 
-    render(canvas, dataBox);
+ //   std::cout << "databox[23232]" << (float)dataBox[23232].r << std::endl;
+
+   render(canvas, dataBox);
 
 
 
@@ -67,7 +69,7 @@ void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
 
 }
 
-float FilterBlur::rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox){
+RGBA FilterBlur::rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox){
 //set the front upper left corner as (0,0,0), we have a scene with:
 
     // x /in (0,71)
@@ -82,39 +84,66 @@ float FilterBlur::rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox){
     //step2: xyz -> dataBox
     //i = x + y*72 + z*40*72
 
-    for(int i=0; i<72; i++){
-        glm::vec3 p = ro + (float)i*rd;
-        int dataPos = (int)p.x - (int)(p.y)*72 + (int)p.z*40*72;
-        if(0 < dataPos < 39*71*71 ){
-            if(dataBox[dataPos].r !=0 || dataBox[dataPos].g !=0 || dataBox[dataPos].b !=0 ){
-                std:: cout<<"somthing";
-                return 1.0f;
-            }
-        }else{
-         //   std:: cout<<"nothing";
-            return 101.;
-        }
+ //    std::cout << "databox[986]" << (float)dataBox[986].r << std::endl;
+ //   std::cout << "rd is" << rd.x << " " << rd.y <<" " << rd.z << std::endl;
 
-    }
-    std:: cout<<"nothing";
-    return 101.;
+    float depth = 0.0;
+    for(int i=0; i<10; i++){
+        glm::vec3 p = ro + depth * rd;
+  //      std::cout << "p is" << p.x << " " << p.y <<" " << p.z << std::endl;
+
+        //step1: uvz' -> xyz
+        float x = (p.x+0.5) * 72;
+        float y = (0.5-p.y) * 40;
+        float z = p.z * 72;
+
+        //step2: xyz -> dataBox
+        int dataPos = (int)x + (int)y*72 + (int)z*40*72;
+         if(0 < dataPos < 40*72*72){
+             if( (float)dataBox[dataPos].r != 0){
+                 std::cout <<"something!" <<std ::endl;
+                 std::cout <<"red is "<< (float)dataBox[dataPos].r <<std ::endl;
+                 std::cout <<"g is "<< (float)dataBox[dataPos].g <<std ::endl;
+                 std::cout <<"b is "<< (float)dataBox[dataPos].b <<std ::endl;
+
+                 return dataBox[dataPos];
+             }
+         }
+
+
+        depth += 0.1;
+}
+
+ //   std:: cout<<"nothing" <<std ::endl;
+    return RGBA(0,0,0,0);
 
 }
 
 void FilterBlur::render(Canvas2D *canvas, RGBA* dataBox){
-    std::cout << "render!";
-    RGBA *pix = canvas->data();
-    glm::vec3 ro = glm::vec3(0, 0, -3);
+  //  std::cout << "databox[986]" << (float)dataBox[986].r << std::endl;
+     std::cout << "render!";
 
-    int size = canvas->width() * canvas->height();
+     int size = canvas->width() * canvas->height();
+     RGBA* pix0 = canvas->data();
 
+     for(int i=0; i<size; i++){
+         pix0[i] = RGBA(0,0,0,0);
+     }
+     canvas -> update();
+
+
+    RGBA* pix = canvas->data();
+    glm::vec3 ro = glm::vec3(0.1, 0.1, -0.5);
     for(int i=0; i<size; i++){
+
+
         float x = (i%canvas->width() - canvas->width()/2)/72.;
         float y = (canvas->height()/2 - i/canvas->width() )/40.;
 
         glm::vec3 rd = glm::normalize(glm::vec3(x, y, 1));
 
-        float d = rayMarch(ro, rd, dataBox);
+        pix[i] = rayMarch(ro, rd, dataBox);
+
 
 
 
@@ -141,6 +170,18 @@ void FilterBlur::checkBox(Canvas2D *canvas, RGBA* dataBox){
     }
 
     canvas -> update();
+}
+
+Canvas2D FilterBlur::removeAll(Canvas2D *canvas){
+    std:: cout <<"remove all color" <<std::endl;
+    int size = canvas->width() * canvas->height();
+    RGBA* pix = canvas->data();
+
+    for(int i=0; i<size; i++){
+        pix[i] = RGBA(0,0,0,0);
+    }
+    canvas -> update();
+
 }
 
 
