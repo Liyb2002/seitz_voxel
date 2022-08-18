@@ -110,8 +110,6 @@ void Canvas2D::mouseUp(int x, int y) {
 void Canvas2D::filterImage() {
     // TODO: [FILTER] Filter the image. Some example code to get the filter type is provided below.
 
-    std::cout << "filter! with blurRadius:" << settings.blurRadius<< std::endl;
-
     // Leave this code here! This code ensures that the Canvas2D will be completely wiped before
     // drawing the new image.
     std::unique_ptr<Filter> m_filter;

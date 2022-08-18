@@ -23,7 +23,9 @@ void FilterBlur::startWork(Canvas2D *canvas,
   //  showColor(data1);
 
     //only start create box when we have three images
-    if(data1.size() > 1 && data2.size()>1 && data3.size()>1){
+    std::cout <<"Startwork";
+
+    if(data1.size() > 1 && data2.size()>1){
         process(canvas, data1,data2,data3);
     }
 
@@ -56,10 +58,90 @@ void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
         }
     }
 
+    render(canvas, dataBox);
+
+
+
+    delete [] dataBox;
+
 
 }
 
+float FilterBlur::rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox){
+//set the front upper left corner as (0,0,0), we have a scene with:
 
+    // x /in (0,71)
+    // y /in (0,39)
+    // z /in (0,71)
+
+    //goal: uvz' coordinate -> xyz coordinate -> dataBox position
+
+    //step1: u(-0.5,0.5) -> x(0,71)
+    //x = (u+0.5) * 72, y = (0.5-v) * 40, z = z'*72
+
+    //step2: xyz -> dataBox
+    //i = x + y*72 + z*40*72
+
+    for(int i=0; i<72; i++){
+        glm::vec3 p = ro + (float)i*rd;
+        int dataPos = (int)p.x - (int)(p.y)*72 + (int)p.z*40*72;
+        if(0 < dataPos < 39*71*71 ){
+            if(dataBox[dataPos].r !=0 || dataBox[dataPos].g !=0 || dataBox[dataPos].b !=0 ){
+                std:: cout<<"somthing";
+                return 1.0f;
+            }
+        }else{
+         //   std:: cout<<"nothing";
+            return 101.;
+        }
+
+    }
+    std:: cout<<"nothing";
+    return 101.;
+
+}
+
+void FilterBlur::render(Canvas2D *canvas, RGBA* dataBox){
+    std::cout << "render!";
+    RGBA *pix = canvas->data();
+    glm::vec3 ro = glm::vec3(0, 0, -3);
+
+    int size = canvas->width() * canvas->height();
+
+    for(int i=0; i<size; i++){
+        float x = (i%canvas->width() - canvas->width()/2)/72.;
+        float y = (canvas->height()/2 - i/canvas->width() )/40.;
+
+        glm::vec3 rd = glm::normalize(glm::vec3(x, y, 1));
+
+        float d = rayMarch(ro, rd, dataBox);
+
+
+
+    }
+    canvas->update();
+
+}
+
+void FilterBlur::checkBox(Canvas2D *canvas, RGBA* dataBox){
+    RGBA *pix = canvas->data();
+    for(int i=0; i<canvas->width()*canvas->height();i++){
+        int intersect = 0;
+        for(int j=0; j<72; i++){
+            if(dataBox[j*72*40 + i].r != 0){
+
+               intersect=1;
+               break;
+            }
+        }
+        if(intersect ==1){
+            pix[i] = RGBA(255,0,0,0);
+        }
+
+    }
+
+    canvas -> update();
+}
 
 
 
