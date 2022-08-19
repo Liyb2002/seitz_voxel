@@ -37,7 +37,6 @@ SOURCES += \
     scenegraph/SceneviewScene.cpp \
     scenegraph/RayScene.cpp \
     shapes/ExampleShape.cpp \
-    shapes/shapeutil.cpp \
     shapes/OpenGLShape.cpp \
     shapes/sphere.cpp \
     shapes/cone.cpp \
@@ -94,7 +93,6 @@ HEADERS += \
     shapes/cone.h \
     shapes/cylinder.h \
     shapes/OpenGLShape.h \
-    shapes/shapeutil.h \
     filter/Filter.h \
     filter/Filterblur.h \
     ui/Canvas2D.h \
