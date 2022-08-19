@@ -96,7 +96,7 @@ RGBA FilterBlur::rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox, int inputHe
  //   std::cout << "rd is" << rd.x << " " << rd.y <<" " << rd.z << std::endl;
 
     float depth = 0.0;
-    for(int i=0; i<10; i++){
+    for(int i=0; i<=50; i++){
         glm::vec3 p = ro + depth * rd;
   //      std::cout << "p is" << p.x << " " << p.y <<" " << p.z << std::endl;
 
@@ -105,24 +105,29 @@ RGBA FilterBlur::rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox, int inputHe
         float y = (0.5-p.y) * inputHeight;
         float z = p.z * inputWidth;
 
+
+
         //step2: xyz -> dataBox
         int dataPos = (int)x + (int)y*inputWidth + (int)z*inputHeight*inputWidth;
-         if(0 < dataPos < inputHeight*inputWidth*inputWidth){
-             if( (float)dataBox[dataPos].r != 0){
-             //    std::cout <<"red is "<< (float)dataBox[dataPos].r <<std ::endl;
-             //    std::cout <<"g is "<< (float)dataBox[dataPos].g <<std ::endl;
-             //    std::cout <<"b is "<< (float)dataBox[dataPos].b <<std ::endl;
+        if(p.x > -0.5 && p.x<0.5 && p.y > -0.5 && p.y < 0.5 && p.z>0.f && p.z<1.f){
+            if (dataPos < inputHeight*inputWidth*inputWidth && dataPos >0){
+                if( (float)dataBox[dataPos].r != 0){
+                //    std::cout <<"red is "<< (float)dataBox[dataPos].r <<std ::endl;
+                //    std::cout <<"g is "<< (float)dataBox[dataPos].g <<std ::endl;
+                //    std::cout <<"b is "<< (float)dataBox[dataPos].b <<std ::endl;
+                   std::cout <<"depth is" << depth << std::endl;
+                    return dataBox[dataPos];
+                }
+            }
+        }
 
-                 return dataBox[dataPos];
-             }
-         }
 
 
         depth += 0.1;
 }
 
- //   std:: cout<<"nothing" <<std ::endl;
-    return RGBA(0,0,0,0);
+  //  std:: cout<<"nothing" <<std ::endl;
+    return RGBA(0,0,0,255);
 
 }
 
@@ -131,18 +136,11 @@ void FilterBlur::render(Canvas2D *canvas, RGBA* dataBox, int inputHeight, int in
      std::cout << "render!";
 
      int size = inputWidth * inputHeight;
-     RGBA* pix0 = canvas->data();
-
-     for(int i=0; i<size; i++){
-         pix0[i] = RGBA(0,0,0,0);
-     }
-     canvas -> update();
-
 
     RGBA* pix = canvas->data();
-    glm::vec3 ro = glm::vec3(0.1, 0.1, -0.5);
-    for(int i=0; i<size; i++){
 
+    glm::vec3 ro = glm::vec3(0.8, 0.8, -2.5);
+    for(int i=0; i<size; i++){
 
         float x = (float)(i%canvas->width() - canvas->width()/2)/inputWidth;
         float y = (float)(canvas->height()/2 - i/canvas->width() )/inputHeight;
@@ -150,9 +148,6 @@ void FilterBlur::render(Canvas2D *canvas, RGBA* dataBox, int inputHeight, int in
         glm::vec3 rd = glm::normalize(glm::vec3(x, y, 1));
 
         pix[i] = rayMarch(ro, rd, dataBox, inputHeight, inputWidth );
-
-
-
 
     }
     canvas->update();
