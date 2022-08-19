@@ -100,50 +100,11 @@ void Brush::brushDragged(int mouseX, int mouseY, Canvas2D* canvas) {
     //
 
     RGBA *pix = canvas->data();
- /*  int size = canvas->width() * canvas->height();
+   int size = canvas->width() * canvas->height();
       std::cout <<"brush dragging";
 
     for (int i = 0; i < size; i++) {
         pix[i] = RGBA(255, 0, 255, 0);
-    }
-    canvas->update();
-*/
-    int r = getRadius();
-    int w = canvas->width();
-    int h = canvas->height();
-
- std::cout <<"brush dragging";
-    RGBA color = getRGBA();
-
-    int startRow = glm::max(0, mouseY-r);
-    int endRow = glm::min(w,mouseY+r);
-    int startCol = glm::max(0,mouseX-r);
-    int endCol = glm::min(h,mouseX+r);
-    int sqrSize = r*r;
-
-
-
-    for(int i=startRow; i<endRow; i++){
-        for(int j=startCol; j<endCol; j++){
-
-            int dst = (mouseY-i)*(mouseY-i) + (mouseX-j)*(mouseX-j);
-            if(dst <= sqrSize){
-                int maskPlace = glm::round(glm::sqrt(static_cast<float>(dst)));
-                //do coloring
-                float mask = m_mask[maskPlace];
-             //   color.setAlpha(255 * 0.1);
-                float srcA = color.a / 255.f;
-
-                setAlpha(20);
-                setBlue(240);
-                setRed(50);
-                setGreen(150);
-
-               // pix[i*w+j] = pix[i*w+j] * (1.f - mask * srcA) + color * mask * srcA;
-               pix[i*w+j] = color;
-            }
-
-        }
     }
 
     canvas->update();
