@@ -139,13 +139,23 @@ void FilterBlur::render(Canvas2D *canvas, RGBA* dataBox, int inputHeight, int in
 
     RGBA* pix = canvas->data();
 
-    glm::vec3 ro = glm::vec3(0.8, 0.8, -2.5);
+    glm::vec3 ro = glm::vec3(0.8, 0.8, 2.5);
     for(int i=0; i<size; i++){
 
         float x = (float)(i%canvas->width() - canvas->width()/2)/inputWidth;
         float y = (float)(canvas->height()/2 - i/canvas->width() )/inputHeight;
 
         glm::vec3 rd = glm::normalize(glm::vec3(x, y, 1));
+
+        glm::vec3 target = glm::vec3(0.f, 0.f, 0.f);
+        glm::vec3 look = glm::normalize(ro - target);
+        glm::vec3 up = glm::vec3(0.0, 1.0, 0.0);
+
+        glm::vec3 cameraForward = -look;
+        glm::vec3 cameraRight = glm::normalize(glm::cross(cameraForward, up));
+        glm::vec3 cameraUp = glm::normalize(glm::cross(cameraRight, cameraForward));
+
+        rd = glm::normalize(cameraRight*rd.x + cameraUp*rd.y + cameraForward*rd.z);
 
         pix[i] = rayMarch(ro, rd, dataBox, inputHeight, inputWidth );
 
