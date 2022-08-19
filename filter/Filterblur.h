@@ -10,12 +10,12 @@ public:
     void Convolve2D(Canvas2D *canvas, std::vector< int > conv);
 
     void startWork(Canvas2D *canvas, std::vector<RGBA>data1,
-              std::vector<RGBA>data2);
+              std::vector<RGBA>data2, std::vector<RGBA>data3);
 
     void showColor(std::vector<RGBA>data2);
 
     void process(Canvas2D *canvas,std::vector<RGBA>data1,
-                 std::vector<RGBA>data2);
+                 std::vector<RGBA>data2, std::vector<RGBA>data3);
 
     RGBA rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox, int inputHeight, int inputWidth);
 

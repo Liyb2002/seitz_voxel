@@ -14,7 +14,7 @@ FilterBlur::~FilterBlur()
 
 
 void FilterBlur::startWork(Canvas2D *canvas,
-                       std::vector<RGBA> data1, std::vector<RGBA> data2
+                       std::vector<RGBA> data1, std::vector<RGBA> data2, std::vector<RGBA> data3
                        ) {
 
  //   std::cout << "canvas height" << canvas->height() << std::endl;
@@ -25,15 +25,15 @@ void FilterBlur::startWork(Canvas2D *canvas,
     //only start create box when we have three images
     std::cout <<"Startwork" <<std::endl;
 
-    if(data1.size() > 1 && data2.size()>1){
-        process(canvas, data1,data2);
+    if(data1.size() > 1 && data2.size()>1 && data3.size()>1){
+        process(canvas, data1,data2, data3);
     }
 
 
 }
 
 void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
-                         std::vector<RGBA> data2){
+                         std::vector<RGBA> data2, std::vector<RGBA> data3){
     int inputWidth = canvas -> width();
     int inputHeight = canvas -> height();
     std::cout << "inputWidth" << inputWidth << std::endl;
@@ -63,6 +63,31 @@ void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
            for(int j=0; j<inputWidth; j++){
                 dataBox[planeSize*(inputWidth-toleft-1) + (toTop-1)*inputWidth + j] = RGBA(0,0,0,0);
             }
+        }
+    }
+
+    //go through data3
+    for(int i=0; i<data3.size(); i++){
+        int toTop = i/inputWidth;
+        int toleft = i%inputWidth;
+        if(data3[i].r != 0 || data3[i].g!= 0 || data3[i].b != 0){
+            for(int j=inputWidth-1; j>=0; j--){
+                 if(dataBox[planeSize*toleft + toTop*inputWidth + j].r != data3[i].r
+                         || dataBox[planeSize*toleft + toTop*inputWidth + j].g != data3[i].g
+                         || dataBox[planeSize*toleft + toTop*inputWidth + j].b != data3[i].b){
+                     if(data2[(toTop+1)*inputWidth - j].r != 0 &&
+                             data2[(toTop+1)*inputWidth - j].g != 0 &&
+                             data2[(toTop+1)*inputWidth - j].b != 0){
+                         dataBox[planeSize*toleft + toTop*inputWidth + j] = data3[i];
+
+                     }else{
+                         break;
+                     }
+
+
+                 }
+             }
+
         }
     }
 
@@ -163,7 +188,7 @@ void FilterBlur::render(Canvas2D *canvas, RGBA* dataBox, int inputHeight, int in
     canvas->update();
 
 }
-/*
+
 void FilterBlur::checkBox(Canvas2D *canvas, RGBA* dataBox){
     RGBA *pix = canvas->data();
     for(int i=0; i<canvas->width()*canvas->height();i++){
@@ -183,7 +208,7 @@ void FilterBlur::checkBox(Canvas2D *canvas, RGBA* dataBox){
 
     canvas -> update();
 }
-*/
+
 Canvas2D FilterBlur::removeAll(Canvas2D *canvas){
     std:: cout <<"remove all color" <<std::endl;
     int size = canvas->width() * canvas->height();

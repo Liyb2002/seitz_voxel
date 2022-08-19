@@ -20,7 +20,7 @@ public:
     Filter();
     virtual ~Filter();
     virtual void startWork(Canvas2D *canvas, std::vector<RGBA>data1,
-                      std::vector<RGBA>data2) = 0;
+                      std::vector<RGBA>data2, std::vector<RGBA>data3) = 0;
 
 
 

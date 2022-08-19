@@ -127,9 +127,15 @@ void Canvas2D::filterImage() {
         }
     }
 
+    if(settings.blurRadius == 3){
+        for(int i=0; i<this->height() * this->width(); i++){
+            data3.push_back(this->data()[i]);
+        }
+    }
+
 
         m_filter = std::make_unique<FilterBlur>();
-        m_filter ->startWork(this, data1, data2);
+        m_filter ->startWork(this, data1, data2, data3);
 
 
 
