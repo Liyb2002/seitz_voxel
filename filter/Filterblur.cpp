@@ -52,7 +52,7 @@ void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
         }
     }
 
-    std::cout << "dataBox.size()" << (float)dataBox[7775000].r;
+  //  std::cout << "dataBox.size()" << (float)dataBox[7775000].r;
 
     //go through data1
     for(int i=0; i<data1.size(); i++){
@@ -121,7 +121,7 @@ RGBA FilterBlur::rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox, int inputHe
  //   std::cout << "rd is" << rd.x << " " << rd.y <<" " << rd.z << std::endl;
 
     float depth = 0.0;
-    for(int i=0; i<=50; i++){
+    for(int i=0; i<=500; i++){
         glm::vec3 p = ro + depth * rd;
   //      std::cout << "p is" << p.x << " " << p.y <<" " << p.z << std::endl;
 
@@ -136,11 +136,10 @@ RGBA FilterBlur::rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox, int inputHe
         int dataPos = (int)x + (int)y*inputWidth + (int)z*inputHeight*inputWidth;
         if(p.x > -0.5 && p.x<0.5 && p.y > -0.5 && p.y < 0.5 && p.z>0.f && p.z<1.f){
             if (dataPos < inputHeight*inputWidth*inputWidth && dataPos >0){
-                if( (float)dataBox[dataPos].r != 0){
+                if( (float)dataBox[dataPos].r != 0 || (float)dataBox[dataPos].g != 0 || (float)dataBox[dataPos].b != 0){
                 //    std::cout <<"red is "<< (float)dataBox[dataPos].r <<std ::endl;
                 //    std::cout <<"g is "<< (float)dataBox[dataPos].g <<std ::endl;
                 //    std::cout <<"b is "<< (float)dataBox[dataPos].b <<std ::endl;
-                   std::cout <<"depth is" << depth << std::endl;
                     return dataBox[dataPos];
                 }
             }
@@ -148,7 +147,7 @@ RGBA FilterBlur::rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox, int inputHe
 
 
 
-        depth += 0.1;
+        depth += 0.01;
 }
 
   //  std:: cout<<"nothing" <<std ::endl;

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>CS 123: Introduction to Computer Graphics</string>
+   <string>3D Reconstruction</string>
   </property>
   <property name="dockNestingEnabled">
    <bool>true</bool>
@@ -39,7 +39,7 @@
        <enum>QTabWidget::North</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab2D">
        <attribute name="title">
@@ -83,8 +83,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>250</width>
-             <height>3058</height>
+             <width>339</width>
+             <height>3059</height>
             </rect>
            </property>
           </widget>
@@ -160,7 +160,7 @@
         <item>
          <widget class="QRadioButton" name="brushTypeConstant">
           <property name="text">
-           <string>Constant</string>
+           <string>aaa</string>
           </property>
           <property name="checked">
            <bool>true</bool>
@@ -376,6 +376,13 @@
         <property name="bottomMargin">
          <number>0</number>
         </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="brushRadiusLabel">
+          <property name="text">
+           <string>Radius</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="3">
          <widget class="QLineEdit" name="brushRadiusTextbox">
           <property name="sizePolicy">
@@ -411,13 +418,6 @@
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="brushRadiusLabel">
-          <property name="text">
-           <string>Radius</string>
           </property>
          </widget>
         </item>
@@ -687,19 +687,19 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QDockWidget" name="filterDock">
+  <widget class="QDockWidget" name="voxel">
    <property name="windowTitle">
     <string>F&amp;ilter</string>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
    </attribute>
-   <widget class="QWidget" name="filterDockContents">
+   <widget class="QWidget" name="reconstructDockContents">
     <layout class="QVBoxLayout" name="verticalLayout_5">
      <item>
-      <widget class="QGroupBox" name="filterType">
+      <widget class="QGroupBox" name="groupBox">
        <property name="title">
-        <string>Filter Type</string>
+        <string>Reconstruct</string>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_6">
         <property name="topMargin">
@@ -712,13 +712,6 @@
          <widget class="Line" name="line_5">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="filterTypeEdgeDetect">
-          <property name="text">
-           <string>Edge Detect</string>
           </property>
          </widget>
         </item>
@@ -781,14 +774,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="filterTypeBlur">
+         <widget class="QRadioButton" name="Voxel">
           <property name="text">
            <string>Blur</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QWidget" name="blurRadius" native="true">
+         <widget class="QWidget" name="rrr" native="true">
           <layout class="QGridLayout" name="gridLayout_8">
            <property name="leftMargin">
             <number>0</number>
@@ -803,7 +796,7 @@
             <number>0</number>
            </property>
            <item row="0" column="2">
-            <widget class="QLineEdit" name="blurRadiusTextbox">
+            <widget class="QLineEdit" name="rrr_3">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -822,7 +815,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QSlider" name="blurRadiusSlider">
+            <widget class="QSlider" name="rrr_2">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -838,7 +831,7 @@
             </widget>
            </item>
            <item row="0" column="0">
-            <widget class="QLabel" name="blurRadiusLabel">
+            <widget class="QLabel" name="rr">
              <property name="enabled">
               <bool>false</bool>
              </property>
@@ -858,7 +851,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="filterTypeScale">
+         <widget class="QRadioButton" name="reconstructTypeScale">
           <property name="enabled">
            <bool>true</bool>
           </property>
@@ -989,7 +982,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="filterTypeRotate">
+         <widget class="QRadioButton" name="reconstructTypeRotate">
           <property name="text">
            <string>Rotate</string>
           </property>
@@ -1060,21 +1053,21 @@
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="filterTypeSpecial1">
+         <widget class="QRadioButton" name="reconstructTypeSpecial1">
           <property name="text">
            <string>Special 1</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="filterTypeSpecial2">
+         <widget class="QRadioButton" name="reconstructTypeSpecial2">
           <property name="text">
            <string>Special 2</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QRadioButton" name="filterTypeSpecial3">
+         <widget class="QRadioButton" name="reconstructTypeSpecial3">
           <property name="text">
            <string>Special 3</string>
           </property>
@@ -1084,14 +1077,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="filterButton">
+      <widget class="QPushButton" name="reconstructButton">
        <property name="text">
-        <string>Filter!</string>
+        <string>reconstruct!</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="filterDockEmptySpace" native="true">
+      <widget class="QWidget" name="reconstructDockEmptySpace" native="true">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
          <horstretch>0</horstretch>
@@ -1920,7 +1913,7 @@
      <x>0</x>
      <y>0</y>
      <width>600</width>
-     <height>25</height>
+     <height>24</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -2044,25 +2037,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeEdgeDetect</sender>
+   <sender>Voxel</sender>
    <signal>toggled(bool)</signal>
-   <receiver>edgeDetectThreshold</receiver>
-   <slot>setEnabled(bool)</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>208</x>
-     <y>1178</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>215</x>
-     <y>1206</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>filterTypeBlur</sender>
-   <signal>toggled(bool)</signal>
-   <receiver>blurRadiusSlider</receiver>
+   <receiver>rrr_2</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2076,9 +2053,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeBlur</sender>
+   <sender>Voxel</sender>
    <signal>toggled(bool)</signal>
-   <receiver>blurRadiusTextbox</receiver>
+   <receiver>rrr_3</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2092,7 +2069,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeScale</sender>
+   <sender>reconstructTypeScale</sender>
    <signal>toggled(bool)</signal>
    <receiver>scaleTextboxX</receiver>
    <slot>setEnabled(bool)</slot>
@@ -2108,7 +2085,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeScale</sender>
+   <sender>reconstructTypeScale</sender>
    <signal>toggled(bool)</signal>
    <receiver>scaleTextboxY</receiver>
    <slot>setEnabled(bool)</slot>
@@ -2124,7 +2101,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeScale</sender>
+   <sender>reconstructTypeScale</sender>
    <signal>toggled(bool)</signal>
    <receiver>scaleSliderX</receiver>
    <slot>setEnabled(bool)</slot>
@@ -2140,7 +2117,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeScale</sender>
+   <sender>reconstructTypeScale</sender>
    <signal>toggled(bool)</signal>
    <receiver>scaleSliderY</receiver>
    <slot>setEnabled(bool)</slot>
@@ -2540,9 +2517,9 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeBlur</sender>
+   <sender>Voxel</sender>
    <signal>toggled(bool)</signal>
-   <receiver>blurRadiusLabel</receiver>
+   <receiver>rr</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
@@ -2556,7 +2533,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeRotate</sender>
+   <sender>reconstructTypeRotate</sender>
    <signal>toggled(bool)</signal>
    <receiver>rotateAngleLabel</receiver>
    <slot>setEnabled(bool)</slot>
@@ -2572,7 +2549,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeRotate</sender>
+   <sender>reconstructTypeRotate</sender>
    <signal>toggled(bool)</signal>
    <receiver>rotateSlider</receiver>
    <slot>setEnabled(bool)</slot>
@@ -2588,7 +2565,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeRotate</sender>
+   <sender>reconstructTypeRotate</sender>
    <signal>toggled(bool)</signal>
    <receiver>rotateAngleEdit</receiver>
    <slot>setEnabled(bool)</slot>
@@ -2668,10 +2645,10 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterButton</sender>
+   <sender>reconstructButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
-   <slot>filterImage()</slot>
+   <slot>reconstructImage()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>119</x>
@@ -2732,7 +2709,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeScale</sender>
+   <sender>reconstructTypeScale</sender>
    <signal>toggled(bool)</signal>
    <receiver>scaleLabelX</receiver>
    <slot>setEnabled(bool)</slot>
@@ -2748,7 +2725,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>filterTypeScale</sender>
+   <sender>reconstructTypeScale</sender>
    <signal>toggled(bool)</signal>
    <receiver>scaleLabelY</receiver>
    <slot>setEnabled(bool)</slot>

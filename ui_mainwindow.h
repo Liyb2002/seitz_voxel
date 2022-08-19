@@ -1436,7 +1436,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "CS 123: Introduction to Computer Graphics", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Simple Voxel Carving", nullptr));
         actionNew->setText(QCoreApplication::translate("MainWindow", "&New", nullptr));
 #if QT_CONFIG(shortcut)
         actionNew->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+N", nullptr));
@@ -1504,21 +1504,11 @@ public:
         useLightingCheckbox->setText(QCoreApplication::translate("MainWindow", "Use lighting", nullptr));
         drawWireframeCheckbox->setText(QCoreApplication::translate("MainWindow", "Draw wireframe", nullptr));
         drawNormalsCheckbox->setText(QCoreApplication::translate("MainWindow", "Draw normals", nullptr));
-        filterDock->setWindowTitle(QCoreApplication::translate("MainWindow", "F&ilter", nullptr));
-        filterType->setTitle(QCoreApplication::translate("MainWindow", "Filter Type", nullptr));
-        filterTypeEdgeDetect->setText(QCoreApplication::translate("MainWindow", "Edge Detect", nullptr));
-        edgeDetectSensitivityLabel->setText(QCoreApplication::translate("MainWindow", "Sensitivity", nullptr));
-        filterTypeBlur->setText(QCoreApplication::translate("MainWindow", "Blur", nullptr));
-        blurRadiusLabel->setText(QCoreApplication::translate("MainWindow", "Radius", nullptr));
-        filterTypeScale->setText(QCoreApplication::translate("MainWindow", "Scale", nullptr));
-        scaleLabelX->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
-        scaleLabelY->setText(QCoreApplication::translate("MainWindow", "Y", nullptr));
-        filterTypeRotate->setText(QCoreApplication::translate("MainWindow", "Rotate", nullptr));
-        rotateAngleLabel->setText(QCoreApplication::translate("MainWindow", "Angle", nullptr));
-        filterTypeSpecial1->setText(QCoreApplication::translate("MainWindow", "Special 1", nullptr));
-        filterTypeSpecial2->setText(QCoreApplication::translate("MainWindow", "Special 2", nullptr));
-        filterTypeSpecial3->setText(QCoreApplication::translate("MainWindow", "Special 3", nullptr));
-        filterButton->setText(QCoreApplication::translate("MainWindow", "Filter!", nullptr));
+        filterDock->setWindowTitle(QCoreApplication::translate("MainWindow", "Voxel Carving", nullptr));
+        filterType->setTitle(QCoreApplication::translate("MainWindow", "Voxel Carving", nullptr));
+        filterTypeBlur->setText(QCoreApplication::translate("MainWindow", "Input Image", nullptr));
+        blurRadiusLabel->setText(QCoreApplication::translate("MainWindow", "Image ID", nullptr));
+        filterButton->setText(QCoreApplication::translate("MainWindow", "Read / Generate!", nullptr));
         rayDock->setWindowTitle(QCoreApplication::translate("MainWindow", "&Ray", nullptr));
         rayAllButton->setText(QCoreApplication::translate("MainWindow", "All", nullptr));
         rayNoneButton->setText(QCoreApplication::translate("MainWindow", "None", nullptr));
