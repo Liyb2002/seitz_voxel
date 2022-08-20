@@ -105,14 +105,14 @@ void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
 RGBA FilterBlur::rayMarch(glm::vec3 ro, glm::vec3 rd, RGBA* dataBox, int inputHeight, int inputWidth){
 //set the front upper left corner as (0,0,0), we have a scene with:
 
-    // x /in (0,71)
-    // y /in (0,39)
-    // z /in (0,71)
+    // x /in (0,inputWidth)
+    // y /in (0,inputHeight)
+    // z /in (0,inputWidth)
 
     //goal: uvz' coordinate -> xyz coordinate -> dataBox position
 
-    //step1: u(-0.5,0.5) -> x(0,71)
-    //x = (u+0.5) * 72, y = (0.5-v) * 40, z = z'*72
+    //step1: u(-0.5,0.5) -> x(0,inputWidth)
+    //x = (u+inputWidth) * 72, y = (0.5-v) * inputHeight, z = z'*72
 
     //step2: xyz -> dataBox
     //i = x + y*72 + z*40*72
