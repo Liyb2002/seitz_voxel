@@ -12,13 +12,13 @@ The project will take three images as input, taken sequencily from the right, th
 Example: 
 We have rendered two spheres using ShaderToy, and took three photos. (1.png for right view, 2.png for front view, 3.png for left view).
 <p>
-<img src="./images/input_example.jpg" >
+<img src="./images/input_example.png" >
 <p\> 
       
 Then open and read the input images using the UI (change the Image ID for different inputs, ids are 1,2,3). After finishing the three inputs, the App with generate a view from a camera located at position (0.8, 0.8, 2.5). 
       
 <p>
-<img src="./images/result_example.jpg" >
+<img src="./images/result_example.png" >
 <p\> 
 
 We will discuss the design of coordinates later.
