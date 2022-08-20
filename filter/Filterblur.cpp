@@ -163,7 +163,7 @@ void FilterBlur::render(Canvas2D *canvas, RGBA* dataBox, int inputHeight, int in
 
     RGBA* pix = canvas->data();
 
-    glm::vec3 ro = glm::vec3(0.8, 0.8, 2.5);
+    glm::vec3 ro = glm::vec3(.5, .5, -1.5);
     for(int i=0; i<size; i++){
 
         float x = (float)(i%canvas->width() - canvas->width()/2)/inputWidth;
