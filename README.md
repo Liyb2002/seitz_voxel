@@ -89,6 +89,7 @@ z = z'*inputWidth
 <p>
 <img src="./images/r1.png" width="300">
 <p\> 
+      
       ro = (-1.,-1.,-1.5)
 <p>
 <img src="./images/r2.png" width="300">
@@ -100,3 +101,7 @@ z = z'*inputWidth
 <p\> 
 
   ## Next Steps
+1.Allowing more inputs. Adding more inputs from different perspectives would help distinguish more complicated shapes. Yet I haven't figured out how to adapt input images with angles into the data box.
+
+2.There are some color fragments floating on the air. I guess these fragments are a result of casting when doing the coordinator conversion, but I haven't find out a way to clear them
+ 
