@@ -60,6 +60,7 @@ Now we have a box reconstructed based on the three input images.
 <p>
 <img src="./images/data0.png" width="300">
 <p\> 
+ 
 How the box is placed in world coordination.
       
   2)Camera coordination. We multiply the camera matrix to make sure the camera is eyeing towards (0,0,0) in the wold coordination.
