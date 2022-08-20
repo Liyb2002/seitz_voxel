@@ -35,20 +35,11 @@ Three inputs can be any size. The size of the buffers would equal to size of the
       
 We build a box with size: input width * input height * input width. And process all three inputs sequentially.
   
-Step1: Process input2. The front view image. The spheres are presented as cylinders.
-<p>
-<img src="./images/data1.png" width="300">
-<p\> 
+Step1: Process input2, the front view image. Then the spheres are presented as cylinders.
   
-Step2: Process input1. The right view image.
-<p>
-<img src="./images/data2.png" width="300">
-<p\> 
+Step2: Process input1, the right view image. Only keep data box color when the color in input1 agree with current box color in the pixel.  
   
-Step3: Process input3. The left view image. Consider the object below: color2 will not be considered if we do not have input3. While adding more inputs from different perspective help to determine the shape of the object, yet "no finite set of input photographs can uniquely detemine their shape". [A Theory of Shape by Space Carving](https://www.cs.toronto.edu/~kyros/pubs/00.ijcv.carve.pdf)
-<p>
-<img src="./images/data3.png" width="300">
-<p\> 
+Step3: Process input3. The left view image. Input3 helps when certain amont of information does not span over the entire x coordinate, i.e we can't see it from the right view. While adding more inputs from different perspective help to determine the shape of the object, yet "no finite set of input photographs can uniquely detemine their shape". [A Theory of Shape by Space Carving](https://www.cs.toronto.edu/~kyros/pubs/00.ijcv.carve.pdf)
 
 Now we have a box reconstructed based on the three input images.
   
