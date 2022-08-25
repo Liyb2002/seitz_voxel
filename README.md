@@ -54,7 +54,7 @@ Now we have a box reconstructed based on the three input images.
  
 How the box is placed in world coordination.
       
-  2)Camera coordination. We multiply the camera matrix to make sure the camera is eyeing towards (0,0,0) in the wold coordination.
+  2)Camera coordination. We multiply the camera matrix to make sure the camera is eyeing towards (0,0,0) in the wold coordination, and we have the canonical view.
   
   3)Corrdination in the box. Given a position in the world coordination, we want to know what is the depth, row number, and column number of the position inside the box. Here is the calculation:
   
