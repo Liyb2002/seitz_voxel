@@ -1,7 +1,6 @@
 #include "sphere.h"
 #include "glm.hpp"
 #include "glm/gtx/transform.hpp"
-#include "shapeutil.h"
 #include "ExampleShape.h"
 
 
