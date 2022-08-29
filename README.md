@@ -97,7 +97,7 @@ z = z'*inputWidth
 
   ### Change Object (good)
   
-  Originally inputs vs Reconstructed 
+  Original inputs vs Reconstructed 
   
 <p>
 <img src="./images/box.png" width="300">
@@ -109,7 +109,7 @@ z = z'*inputWidth
 
   ### Add a Chessboard Floor (failed)
   
-    Originally inputs vs Reconstructed 
+  Original inputs vs Reconstructed 
 
   Our algorithm would consider the box inside the floor, instead of sitting on it. The changing black and white on of the floor would also confuse 
   the algorithm when viewing from different perspectives.
