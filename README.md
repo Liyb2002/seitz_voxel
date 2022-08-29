@@ -76,6 +76,9 @@ z = z'*inputWidth
   I choose raymarch because it is easy to start from the camera position, going step by step for each pixel on the screen. If we encounter a pixel with color in the box, return the color. Raytrace is not chosen since we have no idea the shape of the object in the box, and thus very hard to do intersections.
   
   ## Some Results
+  
+  ### Change Ray Origin (good)
+
  
       ro = (0.,0.,3.5)
 <p>
@@ -90,6 +93,33 @@ z = z'*inputWidth
       ro = (.5, .5, -1.5)
 <p>
 <img src="./images/r3.png" width="300">
+<p\> 
+
+  ### Change Object (good)
+  
+  Originally inputs vs Reconstructed 
+  
+<p>
+<img src="./images/box.png" width="300">
+<p\> 
+
+<p>
+<img src="./images/box_generator.png" width="300">
+<p\> 
+
+  ### Add a Chessboard Floor (failed)
+  
+    Originally inputs vs Reconstructed 
+
+  Our algorithm would consider the box inside the floor, instead of sitting on it. The changing black and white on of the floor would also confuse 
+  the algorithm when viewing from different perspectives.
+  
+<p>
+<img src="./images/failure.png" width="300">
+<p\> 
+
+<p>
+<img src="./images/failed_generator.png" width="300">
 <p\> 
 
   ## Next Steps
