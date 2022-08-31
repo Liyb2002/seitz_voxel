@@ -43,6 +43,40 @@ void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
     int planeSize = inputHeight*inputWidth;
     std::cout << "Create box!";
 
+    for(int i=0; i<inputWidth; i++){
+        for(int j=0; j<inputHeight; j++){
+            for(int k=0; k<inputWidth; k++){
+                //pos in dataBox
+                int thisPos = i*planeSize + j*inputWidth + k;
+
+                //pos in data1(the right view)
+                int rightPos = j*inputWidth + i;
+
+                //pos in data2(the front view)
+                int frontPos = j*inputWidth + k;
+
+                //pos in data3(the left view)
+                int leftPos = j*inputWidth + inputWidth - i;
+
+                if(data1[rightPos].r == data2[frontPos].r){
+                    dataBox[thisPos] = data1[rightPos];
+                }else if(data1[rightPos].r == data3[frontPos].r){
+                    dataBox[thisPos] = data1[rightPos];
+                }else if(data2[rightPos].r == data3[frontPos].r){
+                    dataBox[thisPos] = data2[frontPos];
+                }else{
+                    dataBox[thisPos] = RGBA(0,0,0,0);
+                }
+
+
+            }
+        }
+    }
+
+
+
+
+    /*
     //go through data2, which is the front face
     for(int i=0; i<data2.size(); i++){
         if(data2[i].r!= 0 || data2[i].g!= 0 || data2[i].b!= 0){
@@ -90,7 +124,7 @@ void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
 
         }
     }
-
+*/
  //   std::cout << "databox[23232]" << (float)dataBox[23232].r << std::endl;
 
    render(canvas, dataBox, inputHeight, inputWidth);
