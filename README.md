@@ -95,31 +95,31 @@ z = z'*inputWidth
 <img src="./images/r3.png" width="300">
 <p\> 
 
-  ### Change Object (good)
+  ### Change Object + Add floor (good)
   
   Original inputs vs Reconstructed 
   
 <p>
-<img src="./images/box.png" width="300">
+<img src="./images/box_input.png" width="300">
 <p\> 
 
 <p>
-<img src="./images/box_generator.png" width="300">
+<img src="./images/box_result.png" width="300">
 <p\> 
 
-  ### Add a Chessboard Floor (failed)
+  ### Work on a Transparent Object (failed)
   
   Original inputs vs Reconstructed 
+ 
 
-  Our algorithm would consider the box inside the floor, instead of sitting on it. The changing black and white on of the floor would also confuse 
-  the algorithm when viewing from different perspectives.
+  Our algorithm would attempt to project each pixel in the dataBox and find if the same color appear in the inputs. Yet the transparent nature of the inputs made it hard to find consistent colors.  
   
 <p>
-<img src="./images/failure.png" width="300">
+<img src="./images/transparent_input.png" width="300">
 <p\> 
 
 <p>
-<img src="./images/failed_generator.png" width="300">
+<img src="./images/transparent_result.png" width="300">
 <p\> 
 
   ## Next Steps
