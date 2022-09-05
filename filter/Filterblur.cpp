@@ -43,6 +43,7 @@ void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
     int planeSize = inputHeight*inputWidth;
     std::cout << "Create box!";
 
+    /*
     for(int i=0; i<inputWidth; i++){
         for(int j=0; j<inputHeight; j++){
             for(int k=0; k<inputWidth; k++){
@@ -73,10 +74,10 @@ void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
         }
     }
 
+*/
 
 
 
-    /*
     //go through data2, which is the front face
     for(int i=0; i<data2.size(); i++){
         if(data2[i].r!= 0 || data2[i].g!= 0 || data2[i].b!= 0){
@@ -124,7 +125,7 @@ void FilterBlur::process(Canvas2D *canvas, std::vector<RGBA> data1,
 
         }
     }
-*/
+
  //   std::cout << "databox[23232]" << (float)dataBox[23232].r << std::endl;
 
    render(canvas, dataBox, inputHeight, inputWidth);
@@ -197,7 +198,7 @@ void FilterBlur::render(Canvas2D *canvas, RGBA* dataBox, int inputHeight, int in
 
     RGBA* pix = canvas->data();
 
-    glm::vec3 ro = glm::vec3(.5, .5, -1.5);
+    glm::vec3 ro = glm::vec3(-1.,-1., -1.5);
     for(int i=0; i<size; i++){
 
         float x = (float)(i%canvas->width() - canvas->width()/2)/inputWidth;
