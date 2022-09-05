@@ -78,12 +78,12 @@ z = z'*inputWidth
  
       ro = (0.,0.,3.5)
 <p>
-<img src="./images/r1.png" width="300">
+<img src="./images/t1.png" width="300">
 <p\> 
       
       ro = (-1.,-1.,-1.5)
 <p>
-<img src="./images/r2.png" width="300">
+<img src="./images/t2.png" width="300">
 <p\> 
       
       ro = (.5, .5, -1.5)
